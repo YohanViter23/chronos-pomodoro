@@ -1,24 +1,19 @@
-import { Heading } from './components/Heading';
-
 import './styles/theme.css';
 import './styles/global.css';
-import { TimerIcon } from 'lucide-react';
 
-function App() {
+import { Heading } from './components/Heading';
+import { Container } from './components/Container';
+
+export function App() {
   return (
     <>
-      <Heading>
-        Olá Mundo1
-        <button>
-          <TimerIcon />
-        </button>
-      </Heading>
-      <p>
-        Teste de yohan viter do curso de REACT para web do curso de chronos
-        pomodoro.
-      </p>
+      <Container>
+        <Heading>Logo</Heading>
+      </Container>
+
+      <Container>
+        <Heading>Menu</Heading>
+      </Container>
     </>
   );
 }
-
-export { App };
