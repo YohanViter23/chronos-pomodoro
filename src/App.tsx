@@ -4,11 +4,12 @@ import type { TaskStateModel } from './models/TaskStateModel';
 import './styles/theme.css';
 import './styles/global.css';
 import { useState } from 'react';
+import { TaskContext } from './contexts/TaskContext';
 
 const initialState: TaskStateModel = {
   tasks: [],
   secondsRemaining: 0,
-  formattedSecondsRemaining: '10:00',
+  formattedSecondsRemaining: '00:00',
   activeTask: null,
   currentCycle: 0,
   config: {
@@ -23,5 +24,9 @@ export function App() {
 
   console.log('APP', state);
 
-  return <Home state={state} setState={setState} />;
+  return (
+    <TaskContext.Provider value={{ outraCoisa: 321 }}>
+      <Home />
+    </TaskContext.Provider>
+  );
 }
