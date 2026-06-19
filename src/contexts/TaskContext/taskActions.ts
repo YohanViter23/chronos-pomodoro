@@ -9,11 +9,10 @@ export enum TaskActionTypes {
 export type TaskActionModel =
   | {
       type: TaskActionTypes.START_TASK;
-      parload: TaskModel;
+      payload: TaskModel;
     }
   | {
       type: TaskActionTypes.INTERRRUPT_TASK;
-      parload: TaskModel;
     }
   | {
       type: TaskActionTypes.RESET_STATE;
