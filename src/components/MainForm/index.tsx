@@ -8,6 +8,7 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
@@ -15,7 +16,6 @@ export function MainForm() {
 
   //Ciclos
   const nextCycle = getNextCycle(state.currentCycle);
-  //Tipos de ciclos
   const nextCycleType = getNextCycleType(nextCycle);
 
   function handleCreateNewTask(event: React.SubmitEvent<HTMLFormElement>) {
@@ -41,6 +41,22 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+
+    const worker = new Worker(
+      new URL('../../workers/timerWorker.js', import.meta.url),
+    );
+
+    worker.postMessage('FAVOR');
+
+    worker.postMessage('FALA_OI');
+
+    worker.postMessage('BLABLABLA');
+
+    worker.postMessage('FECHAR');
+
+    worker.onmessage = function (event) {
+      console.log('PRINCIPAL recebeu:', event.data);
+    };
   }
 
   function handleInterruptTask() {
@@ -61,7 +77,7 @@ export function MainForm() {
       </div>
 
       <div className='formRow'>
-        <p>Proximo intervalo é de 25min</p>
+        <Tips />
       </div>
 
       {state.currentCycle > 0 && (
